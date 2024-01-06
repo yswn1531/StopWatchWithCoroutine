@@ -15,13 +15,19 @@ import com.sesac.stopwatchwithcoroutine.databinding.ActivityChannelBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.ObsoleteCoroutinesApi
 import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.channels.ticker
 import kotlinx.coroutines.launch
 
+@OptIn(ObsoleteCoroutinesApi::class)
 class StopWatchWithChannel : AppCompatActivity() {
 
+
+
     private lateinit var binding: ActivityChannelBinding
+
+    private val delayTime = 10L
     private val defaultCoroutineScope = CoroutineScope(Dispatchers.Default)
     private var repeatedTime = 0
     private var repeatedTimeSub = 0
@@ -67,11 +73,13 @@ class StopWatchWithChannel : AppCompatActivity() {
     }
     private suspend fun timerStart() {
         CoroutineScope(Dispatchers.Main).launch {
-            binding.startBtn.setBackgroundColor(Color.RED)
-            binding.startBtn.text = resources.getString(R.string.stop)
-            binding.resetBtn.text = resources.getString(R.string.split_timer)
+            with(binding){
+                startBtn.setBackgroundColor(Color.RED)
+                startBtn.text = resources.getString(R.string.stop)
+                resetBtn.text = resources.getString(R.string.split_timer)
+            }
         }
-        val tickerChannel = ticker(10,0,Dispatchers.Default)
+        val tickerChannel = ticker(delayTime,0,Dispatchers.Default)
         tickerChannel.consumeEach {
             repeatedTime++
             val minute = repeatedTime.getMinutes()

@@ -68,12 +68,13 @@ class StopWatchWithCoroutine : AppCompatActivity(){
      *
      * @param delayTime
      */
-    @SuppressLint("SetTextI18n")
     private suspend fun timerStart(delayTime: Long = 10L) {
         CoroutineScope(Dispatchers.Main).launch {
-            binding.startBtn.setBackgroundColor(Color.RED)
-            binding.startBtn.text = resources.getString(R.string.stop)
-            binding.resetBtn.text = resources.getString(R.string.split_timer)
+            with(binding){
+                startBtn.setBackgroundColor(Color.RED)
+                startBtn.text = resources.getString(R.string.stop)
+                resetBtn.text = resources.getString(R.string.split_timer)
+            }
         }
         while (true) {
             repeatedTime++

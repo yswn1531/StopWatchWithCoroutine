@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="mainTimerTextSize">40sp</dimen>
+    <dimen name="subTimerTextSize">25sp</dimen>
+    <dimen name="mainTimerMarginTop">84dp</dimen>
+    <dimen name="subTimerMarginTop">150dp</dimen>
+    <dimen name="buttonWidth">110dp</dimen>
+    <dimen name="indexLayoutMarginTop">30dp</dimen>
+    <dimen name="lineWidth">300dp</dimen>
+    <dimen name="timeLabScrollMarginBottom">20dp</dimen>
+    <dimen name="labLayoutMarginTop">20dp</dimen>
+    <dimen name="buttonLayoutMarginBottom">50dp</dimen>
+    <dimen name="buttonMarginEnd">30dp</dimen>
+</resources>

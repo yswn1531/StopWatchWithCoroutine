@@ -16,7 +16,11 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-
+/**
+ * Stop watch with coroutine
+ *
+ * 일정 delay 마다 Unit을 생산하는 Ticker channel를 이용한 방식
+ */
 class StopWatchWithCoroutine : AppCompatActivity(){
 
     private lateinit var binding: ActivityCoroutineBinding

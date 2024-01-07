@@ -16,11 +16,16 @@ import com.sesac.stopwatchwithcoroutine.databinding.ActivityChannelBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.ObsoleteCoroutinesApi
 import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.channels.ticker
 import kotlinx.coroutines.launch
 
-
+/**
+ * Stop watch with channel
+ *
+ * @constructor Create empty Stop watch with channel
+ */
 class StopWatchWithChannel : AppCompatActivity() {
 
     private lateinit var binding: ActivityChannelBinding
@@ -90,6 +95,7 @@ class StopWatchWithChannel : AppCompatActivity() {
      *  Main Timer 시작
      *
      */
+    @OptIn(ObsoleteCoroutinesApi::class)
     private suspend fun mainTimerStart() {
         settingWhenStartButtonUI()
         val tickerChannel = ticker(DELAY_TIME,0,Dispatchers.Default)
@@ -126,6 +132,7 @@ class StopWatchWithChannel : AppCompatActivity() {
      * Sub timer start 구간기록 타이머
      *
      */
+    @OptIn(ObsoleteCoroutinesApi::class)
     private suspend fun subTimerStart() {
         val tickerChannel = ticker(10,0,Dispatchers.Default)
         tickerChannel.consumeEach {
@@ -304,6 +311,4 @@ class StopWatchWithChannel : AppCompatActivity() {
             subTimerJob.cancel()
         }
     }
-
-
 }

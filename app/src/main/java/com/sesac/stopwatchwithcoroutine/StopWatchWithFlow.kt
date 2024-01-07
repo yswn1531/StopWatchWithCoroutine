@@ -23,11 +23,15 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
+/**
+ * Stop watch with flow
+ *
+ * @constructor Create empty Stop watch with flow
+ */
 class StopWatchWithFlow : AppCompatActivity() {
 
     private lateinit var binding: ActivityFlowBinding
 
-    private val delayTime = 10L
     private val defaultCoroutineScope = CoroutineScope(Dispatchers.Default)
     private var repeatedTime = 0
     private var repeatedTimeSub = 0

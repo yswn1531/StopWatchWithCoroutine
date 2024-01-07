@@ -5,10 +5,10 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:id="@+id/mainTimerLayout"
+        android:id="@+id/mainTimer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="90dp"
+        android:layout_marginTop="@dimen/mainTimerMarginTop"
         android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/init_zero"
-            android:textSize="40sp">
+            android:textSize="@dimen/mainTimerTextSize">
 
         </TextView>
 
@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/colon"
-            android:textSize="40sp">
+            android:textSize="@dimen/mainTimerTextSize">
 
         </TextView>
 
@@ -36,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/init_zero"
-            android:textSize="40sp">
+            android:textSize="@dimen/mainTimerTextSize">
 
         </TextView>
 
@@ -44,7 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/dot"
-            android:textSize="40sp">
+            android:textSize="@dimen/mainTimerTextSize">
 
         </TextView>
 
@@ -53,29 +53,30 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/init_zero"
-            android:textSize="40sp">
+            android:textSize="@dimen/mainTimerTextSize">
 
         </TextView>
 
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/subTimerLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/subTimerMarginTop"
         android:gravity="center"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mainTimerLayout">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/tempMinuteText"
+            android:id="@+id/subMinuteText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/init_zero"
             android:textColor="#80000000"
-            android:textSize="25sp">
+            android:textSize="@dimen/subTimerTextSize">
         </TextView>
 
         <TextView
@@ -83,16 +84,16 @@
             android:layout_height="wrap_content"
             android:text="@string/colon"
             android:textColor="#80000000"
-            android:textSize="25sp">
+            android:textSize="@dimen/subTimerTextSize">
         </TextView>
 
         <TextView
-            android:id="@+id/tempSecondText"
+            android:id="@+id/subSecondText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/init_zero"
             android:textColor="#80000000"
-            android:textSize="25sp">
+            android:textSize="@dimen/subTimerTextSize">
         </TextView>
 
         <TextView
@@ -100,33 +101,31 @@
             android:layout_height="wrap_content"
             android:text="@string/dot"
             android:textColor="#80000000"
-            android:textSize="25sp">
-
+            android:textSize="@dimen/subTimerTextSize">
         </TextView>
 
         <TextView
-            android:id="@+id/tempMilliSecondText"
+            android:id="@+id/subMilliSecondText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/init_zero"
             android:textColor="#80000000"
-            android:textSize="25sp">
-
+            android:textSize="@dimen/subTimerTextSize">
         </TextView>
 
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/linearLayout2"
+        android:id="@+id/indexLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="@dimen/indexLayoutMarginTop"
         android:visibility="invisible"
         android:gravity="center"
         android:weightSum="4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+        app:layout_constraintTop_toBottomOf="@+id/subTimerLayout">
 
         <TextView
             android:layout_width="wrap_content"
@@ -154,24 +153,24 @@
 
     <View
         android:id="@+id/line"
-        android:layout_width="300dp"
+        android:layout_width="@dimen/lineWidth"
         android:layout_height="1dp"
         android:layout_gravity="center"
         android:visibility="invisible"
         android:background="#20000000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        app:layout_constraintTop_toBottomOf="@+id/indexLayout"
         android:layout_marginTop="20dp"
         >
     </View>
 
     <ScrollView
-        android:id="@+id/scoll1"
+        android:id="@+id/timeLabScroll"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="@dimen/timeLabScrollMarginBottom"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -179,13 +178,12 @@
         app:layout_constraintTop_toBottomOf="@+id/line">
 
         <LinearLayout
-            android:id="@+id/lapLayout"
+            android:id="@+id/labLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/labLayoutMarginTop"
             android:orientation="vertical">
-
         </LinearLayout>
 
 
@@ -199,13 +197,13 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginBottom="50dp">
+        android:layout_marginBottom="@dimen/buttonLayoutMarginBottom">
 
         <Button
             android:id="@+id/resetBtn"
-            android:layout_width="110dp"
+            android:layout_width="@dimen/buttonWidth"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="30dp"
+            android:layout_marginEnd="@dimen/buttonMarginEnd"
             android:backgroundTint="#10000000"
             android:text="@string/split_timer"
             android:textStyle="bold"
@@ -214,7 +212,7 @@
 
         <Button
             android:id="@+id/startBtn"
-            android:layout_width="110dp"
+            android:layout_width="@dimen/buttonWidth"
             android:layout_height="wrap_content"
             android:text="@string/start"
             android:textStyle="bold"

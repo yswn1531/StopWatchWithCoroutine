@@ -16,10 +16,11 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-const val DELAY_TIME = 10L
+
 class StopWatchWithCoroutine : AppCompatActivity(){
 
     private lateinit var binding: ActivityCoroutineBinding
+
     private val defaultCoroutineScope = CoroutineScope(Dispatchers.Default)
     private var repeatedTime = 0
     private var repeatedTimeSub = 0
@@ -168,6 +169,14 @@ class StopWatchWithCoroutine : AppCompatActivity(){
      */
     private fun reset() {
         coroutineCancel()
+        initTimer()
+    }
+
+    /**
+     * Timer 초기화
+     *
+     */
+    private fun initTimer() {
         isRunning = false
         repeatedTime = 0
         repeatedTimeSub = 0

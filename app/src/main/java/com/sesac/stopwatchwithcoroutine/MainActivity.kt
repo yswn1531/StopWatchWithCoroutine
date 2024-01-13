@@ -1,11 +1,6 @@
 package com.sesac.stopwatchwithcoroutine
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.sesac.stopwatchwithcoroutine.databinding.ActivityMainBinding
 
@@ -18,7 +13,22 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater).also {
             setContentView(it.root)
         }
-        val list = arrayListOf<String>()
+
+        with(binding){
+           coroutineButton.setOnClickListener {
+               supportFragmentManager.beginTransaction().replace(R.id.frameLayout,StopwatchWithCoroutine()).commit()
+           }
+            channelButton.setOnClickListener {
+                supportFragmentManager.beginTransaction().replace(R.id.frameLayout,StopwatchWithChannel()).commit()
+            }
+            flowButton.setOnClickListener {
+                supportFragmentManager.beginTransaction().replace(R.id.frameLayout,StopwatchWithFlow()).commit()
+            }
+        }
+
+
+
+        /*val list = arrayListOf<String>()
         list.add("StopWatchWithCoroutine")
         list.add("StopWatchWithChannel")
         list.add("StopWatchWithFlow")
@@ -27,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         adapter = ArrayAdapter(this@MainActivity, android.R.layout.simple_list_item_1, list)
         with(binding){
             listView.adapter = adapter
-            listView.setOnItemClickListener { parent, view, position, id ->
+            listView.setOnItemClickListener { _, _, _, id ->
                 when(id){
                     0L -> {
                         val intent = Intent(this@MainActivity, StopWatchWithCoroutine::class.java)
@@ -43,7 +53,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
-        }
+        }*/
     }
 
 }

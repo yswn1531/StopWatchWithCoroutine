@@ -4,6 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="@dimen/verTextMargin"
+        android:text="@string/ver_flow"
+        />
+
     <LinearLayout
         android:id="@+id/mainTimer"
         android:layout_width="match_parent"
@@ -65,7 +74,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/subTimerMarginTop"
         android:gravity="center"
-        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -120,7 +128,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/indexLayoutMarginTop"
-        android:visibility="invisible"
         android:gravity="center"
         android:weightSum="4"
         app:layout_constraintEnd_toEndOf="parent"
@@ -156,7 +163,6 @@
         android:layout_width="@dimen/lineWidth"
         android:layout_height="1dp"
         android:layout_gravity="center"
-        android:visibility="invisible"
         android:background="#20000000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -171,7 +177,6 @@
         android:layout_height="0dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="@dimen/timeLabScrollMarginBottom"
-        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@id/buttonLayout"
@@ -188,6 +193,14 @@
 
 
     </ScrollView>
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/timeLabGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids= "timeLabScroll, subTimerLayout, indexLayout, line"
+        />
 
     <LinearLayout
         android:id="@+id/buttonLayout"

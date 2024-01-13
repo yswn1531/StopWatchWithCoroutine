@@ -10,5 +10,11 @@
     <string name="whole_time">전체 시간</string>
     <string name="dot">" . "</string>
     <string name="colon">" : "</string>
+    <string name="coroutine">Coroutine</string>
+    <string name="channel">Channel</string>
+    <string name="flow">Flow</string>
+    <string name="ver_coroutine">Ver.Coroutine</string>
+    <string name="ver_channel">Ver.Channel</string>
+    <string name="ver_flow">Ver.Flow</string>
 
 </resources>

@@ -3,16 +3,19 @@ package com.sesac.stopwatchwithcoroutine
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.sesac.stopwatchwithcoroutine.common.BaseFragment
 import com.sesac.stopwatchwithcoroutine.common.DELAY_TIME
+import com.sesac.stopwatchwithcoroutine.common.TIME_FORMAT
 import com.sesac.stopwatchwithcoroutine.common.getMilliseconds
 import com.sesac.stopwatchwithcoroutine.common.getMinutes
 import com.sesac.stopwatchwithcoroutine.common.getSeconds
-import com.sesac.stopwatchwithcoroutine.databinding.ActivityChannelBinding
+import com.sesac.stopwatchwithcoroutine.databinding.FragmentStopwatchWithChannelBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -21,14 +24,8 @@ import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.channels.ticker
 import kotlinx.coroutines.launch
 
-/**
- * Stop watch with channel
- *
- * @constructor Create empty Stop watch with channel
- */
-class StopWatchWithChannel : AppCompatActivity() {
 
-    private lateinit var binding: ActivityChannelBinding
+class StopwatchWithChannel : BaseFragment<FragmentStopwatchWithChannelBinding>(FragmentStopwatchWithChannelBinding::inflate) {
 
     private val defaultCoroutineScope = CoroutineScope(Dispatchers.Default)
     private var repeatedTime = 0
@@ -38,11 +35,18 @@ class StopWatchWithChannel : AppCompatActivity() {
 
     private lateinit var mainTimerJob: Job
     private lateinit var subTimerJob: Job
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityChannelBinding.inflate(layoutInflater).also {
-            setContentView(it.root)
-        }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentStopwatchWithChannelBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         clickStartButton()
         clickResetButton()
     }
@@ -98,7 +102,7 @@ class StopWatchWithChannel : AppCompatActivity() {
     @OptIn(ObsoleteCoroutinesApi::class)
     private suspend fun mainTimerStart() {
         settingWhenStartButtonUI()
-        val tickerChannel = ticker(DELAY_TIME,0,Dispatchers.Default)
+        val tickerChannel = ticker(DELAY_TIME,0, Dispatchers.Default)
         tickerChannel.consumeEach {
             repeatedTime++
             val minute = repeatedTime.getMinutes()
@@ -106,9 +110,9 @@ class StopWatchWithChannel : AppCompatActivity() {
             val milliseconds = repeatedTime.getMilliseconds()
             CoroutineScope(Dispatchers.Main).launch {
                 with(binding) {
-                    minuteText.text = String.format("%02d",minute)
-                    secondText.text = String.format("%02d",seconds)
-                    milliSecondText.text = String.format("%02d",milliseconds)
+                    minuteText.text = String.format(TIME_FORMAT,minute)
+                    secondText.text = String.format(TIME_FORMAT,seconds)
+                    milliSecondText.text = String.format(TIME_FORMAT,milliseconds)
                 }
             }
         }
@@ -134,7 +138,7 @@ class StopWatchWithChannel : AppCompatActivity() {
      */
     @OptIn(ObsoleteCoroutinesApi::class)
     private suspend fun subTimerStart() {
-        val tickerChannel = ticker(10,0,Dispatchers.Default)
+        val tickerChannel = ticker(10,0, Dispatchers.Default)
         tickerChannel.consumeEach {
             repeatedTimeSub++
             val minute = repeatedTimeSub.getMinutes()
@@ -142,9 +146,9 @@ class StopWatchWithChannel : AppCompatActivity() {
             val milliseconds = repeatedTimeSub.getMilliseconds()
             CoroutineScope(Dispatchers.Main).launch {
                 with(binding) {
-                    subMinuteText.text = String.format("%02d",minute)
-                    subSecondText.text = String.format("%02d",seconds)
-                    subMilliSecondText.text = String.format("%02d",milliseconds)
+                    subMinuteText.text = String.format(TIME_FORMAT,minute)
+                    subSecondText.text = String.format(TIME_FORMAT,seconds)
+                    subMilliSecondText.text = String.format(TIME_FORMAT,milliseconds)
                 }
             }
         }
@@ -165,7 +169,7 @@ class StopWatchWithChannel : AppCompatActivity() {
      */
     private fun settingWhenPauseButtonUI(){
         with(binding){
-            startBtn.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.basic))
+            startBtn.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.basic))
             startBtn.text = resources.getString(R.string.resume)
             resetBtn.text = resources.getString(R.string.reset)
         }
@@ -230,7 +234,7 @@ class StopWatchWithChannel : AppCompatActivity() {
      */
     private fun resetButtonUI(){
         with(binding){
-            startBtn.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.basic))
+            startBtn.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.basic))
             startBtn.text = resources.getString(R.string.start)
             resetBtn.text = resources.getString(R.string.split_timer)
         }
@@ -254,22 +258,22 @@ class StopWatchWithChannel : AppCompatActivity() {
      */
     @SuppressLint("SetTextI18n")
     private fun addCurrentTapTime() {
-        val labTimeTV = TextView(this).apply {
+        val labTimeTV = TextView(requireContext()).apply {
             textSize = 20f
         }
 
-        val minute = String.format("%02d", repeatedTime.getMinutes())
-        val seconds = String.format("%02d", repeatedTime.getSeconds())
-        val milliseconds = String.format("%02d", repeatedTime.getMilliseconds())
-        val subMinute = String.format("%02d", repeatedTimeSub.getMinutes())
-        val subSeconds = String.format("%02d", repeatedTimeSub.getSeconds())
-        val subMilliseconds = String.format("%02d", repeatedTimeSub.getMilliseconds())
+        val minute = String.format(TIME_FORMAT, repeatedTime.getMinutes())
+        val seconds = String.format(TIME_FORMAT, repeatedTime.getSeconds())
+        val milliseconds = String.format(TIME_FORMAT, repeatedTime.getMilliseconds())
+        val subMinute = String.format(TIME_FORMAT, repeatedTimeSub.getMinutes())
+        val subSeconds = String.format(TIME_FORMAT, repeatedTimeSub.getSeconds())
+        val subMilliseconds = String.format(TIME_FORMAT, repeatedTimeSub.getMilliseconds())
 
         with(labTimeTV) {
             text = if(saveIndex == 1) {
-                """         ${String.format("%02d",saveIndex)}             $minute:$seconds.$milliseconds        $minute:$seconds.$milliseconds     """
+                """         ${String.format(TIME_FORMAT,saveIndex)}             $minute:$seconds.$milliseconds        $minute:$seconds.$milliseconds     """
             } else {
-                """         ${String.format("%02d",saveIndex)}             $subMinute:$subSeconds.$subMilliseconds        $minute:$seconds.$milliseconds     """
+                """         ${String.format(TIME_FORMAT,saveIndex)}             $subMinute:$subSeconds.$subMilliseconds        $minute:$seconds.$milliseconds     """
             }
             layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,

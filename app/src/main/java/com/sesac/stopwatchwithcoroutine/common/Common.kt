@@ -5,3 +5,4 @@ package com.sesac.stopwatchwithcoroutine.common
  fun Int.getMilliseconds() = this % 100
 
 const val DELAY_TIME = 10L
+const val TIME_FORMAT = "%02d"

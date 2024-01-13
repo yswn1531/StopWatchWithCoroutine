@@ -13,15 +13,6 @@
         android:theme="@style/Theme.StopWatchWithCoroutine"
         tools:targetApi="31">
         <activity
-            android:name=".StopWatchWithCoroutine"
-            android:exported="false" />
-        <activity
-            android:name=".StopWatchWithChannel"
-            android:exported="false" />
-        <activity
-            android:name=".StopWatchWithFlow"
-            android:exported="false" />
-        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

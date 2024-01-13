@@ -11,4 +11,5 @@
     <dimen name="labLayoutMarginTop">20dp</dimen>
     <dimen name="buttonLayoutMarginBottom">50dp</dimen>
     <dimen name="buttonMarginEnd">30dp</dimen>
+    <dimen name="verTextMargin">10dp</dimen>
 </resources>

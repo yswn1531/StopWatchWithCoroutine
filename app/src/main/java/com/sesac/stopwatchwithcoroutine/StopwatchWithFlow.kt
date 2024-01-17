@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.sesac.stopwatchwithcoroutine.common.BaseFragment
 import com.sesac.stopwatchwithcoroutine.common.DELAY_TIME
+import com.sesac.stopwatchwithcoroutine.common.TEXT_MARGIN
 import com.sesac.stopwatchwithcoroutine.common.TIME_FORMAT
 import com.sesac.stopwatchwithcoroutine.common.getMilliseconds
 import com.sesac.stopwatchwithcoroutine.common.getMinutes
@@ -20,7 +21,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
@@ -114,14 +114,11 @@ class StopwatchWithFlow : BaseFragment<FragmentStopwatchWithFlowBinding>(Fragmen
         }
     }
 
-    private fun mainTimerFlow() : Flow<Unit> {
-        val timerFlow = flowOf(repeatedTime)
+    private fun mainTimerFlow() = flowOf(repeatedTime)
             .map {
                 repeatedTime++
                 delay(DELAY_TIME)
             }.flowOn(Dispatchers.Default)
-        return timerFlow
-    }
 
     /**
      * 시작버튼 눌렀을 때 Button UI
@@ -158,14 +155,11 @@ class StopwatchWithFlow : BaseFragment<FragmentStopwatchWithFlowBinding>(Fragmen
         }
     }
 
-    private fun subTimerFlow() : Flow<Unit>{
-        val timerFlow = flowOf(repeatedTimeSub)
-            .map {
-                repeatedTimeSub++
-                delay(10)
-            }.flowOn(Dispatchers.Default)
-        return timerFlow
-    }
+    private fun subTimerFlow() = flowOf(repeatedTimeSub)
+        .map {
+            repeatedTimeSub++
+            delay(DELAY_TIME)
+        }.flowOn(Dispatchers.Default)
 
 
     /**
@@ -293,7 +287,7 @@ class StopwatchWithFlow : BaseFragment<FragmentStopwatchWithFlowBinding>(Fragmen
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
             ).also {
-                it.setMargins(0, 15, 0, 15)
+                it.setMargins(0, TEXT_MARGIN, 0, TEXT_MARGIN)
             }
             binding.labLayout.addView(labTimeTV, 0)
         }

@@ -6,3 +6,4 @@ package com.sesac.stopwatchwithcoroutine.common
 
 const val DELAY_TIME = 10L
 const val TIME_FORMAT = "%02d"
+const val TEXT_MARGIN = 15

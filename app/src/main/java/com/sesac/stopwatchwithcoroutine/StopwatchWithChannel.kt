@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.sesac.stopwatchwithcoroutine.common.BaseFragment
 import com.sesac.stopwatchwithcoroutine.common.DELAY_TIME
+import com.sesac.stopwatchwithcoroutine.common.TEXT_MARGIN
 import com.sesac.stopwatchwithcoroutine.common.TIME_FORMAT
 import com.sesac.stopwatchwithcoroutine.common.getMilliseconds
 import com.sesac.stopwatchwithcoroutine.common.getMinutes
@@ -138,7 +139,7 @@ class StopwatchWithChannel : BaseFragment<FragmentStopwatchWithChannelBinding>(F
      */
     @OptIn(ObsoleteCoroutinesApi::class)
     private suspend fun subTimerStart() {
-        val tickerChannel = ticker(10,0, Dispatchers.Default)
+        val tickerChannel = ticker(DELAY_TIME,0, Dispatchers.Default)
         tickerChannel.consumeEach {
             repeatedTimeSub++
             val minute = repeatedTimeSub.getMinutes()
@@ -279,7 +280,7 @@ class StopwatchWithChannel : BaseFragment<FragmentStopwatchWithChannelBinding>(F
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
             ).also {
-                it.setMargins(0, 15, 0, 15)
+                it.setMargins(0, TEXT_MARGIN, 0, TEXT_MARGIN)
             }
             binding.labLayout.addView(labTimeTV, 0)
         }
